@@ -8,17 +8,21 @@
 
 // // ***cycle***
 
-// arr2 = [1, 2, 3];
+// arr1 = [1, 2, 3];
 // for (var i = arr2.length; i < 6; i++) {
 //  	arr2[i] = i + 1;
 //  };
-// console.log(arr2);
+// console.log(arr1);
+
+// ***(Method splice())
+// arr1 = [1, 2, 3];
+// arr1.splice(3, 0, 4, 5, 6)
+// console.log(arr1);
 
  // 2. Дан массив [1, 2, 3]. Добавьте ему в начало элементы 4, 5, 6
- // ***(Method shift())***
+ // ***(Method unshift())***
 
 // arr1 = [1, 2, 3];
-
 // arr1.unshift(4, 5, 6);
 // console.log(arr1);
 
