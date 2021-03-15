@@ -1,74 +1,56 @@
 
-//1. Дан массив [1, 2, 3]. Добавьте ему в конец элементы 4, 5, 6.
- // ***(Method push())***
+// ДЗ: проапгрейдить функцию суммирования, чтобы она обрабатывала не только числа после просчитанного диапазона, но и в начале - memSum(0,10); искать не до первого совпадения, а до лучшего
+    // *********************************
+function sumRange(){
 
-// arr1 = [1, 2, 3];
-// arr1.push(4,5,6);
-// console.log(arr1);
+  let memory = [];
 
-// // ***cycle***
+  return function(a, b){
+    
+    if(a > b){
+      let c = a;
+      a = b;
+      b = c;
+    }
 
-// arr1 = [1, 2, 3];
-// for (var i = arr2.length; i < 6; i++) {
-//  	arr2[i] = i + 1;
-//  };
-// console.log(arr1);
+    let result = a;
+  
+    let obj = {
+      start: a,
+      end: b
+    }
 
-// ***(Method splice())
-// arr1 = [1, 2, 3];
-// arr1.splice(3, 0, 4, 5, 6)
-// console.log(arr1);
+    if(memory.length > 0){
+      memory.forEach(function(item){ 
+        if(item.start == a && item.end <= b){ 
+          result = item.sum; 
+          a = item.end;
+        }
+      });
+    }
 
- // 2. Дан массив [1, 2, 3]. Добавьте ему в начало элементы 4, 5, 6
- // ***(Method unshift())***
+    for(let i = a+1; i <= b; i++){ 
+      result += i;
+    }
 
-// arr1 = [1, 2, 3];
-// arr1.unshift(4, 5, 6);
-// console.log(arr1);
+    obj.sum = result; 
+    memory.push(obj); 
+    console.log(memory); 
+    memory.sort((a,b) => {return b.start - a.start});
 
-// // ***(Method concat)
+        // <<<<Я В общем просто развернул массив от большего старта к меньшему и соответсвенно
+        //  цыкл не будет останавливатьcz на первом попавшемся меньшем значении, а будет идти 
+        // по сортированному массиву до первого удобного>>>
+  }
 
-// [4,5,6].concat(arr1);
-// console.log(arr1);
 
-// // ***(Method splice)
+}
 
-// arr1.splice(0, 0, 4, 5, 6);
-// console.log(arr1);
+let memSum = sumRange();
+memSum(0,10);
+memSum(1,15);
 
-// 3. массив [1, 2, 3, 4, 5]. С помощью метода slice запишите в новый элементы [1, 2, 3].
-// ***(Method slice())
 
-// arr = [1, 2, 3, 4, 5];
-// arr1 = arr.slice(0, 3);
-// console.log(arr1);
+memSum(2,5);
+memSum(2,8);
 
-// 4. Дан массив [1, 2, 3, 4, 5]. С помощью метода slice запишите в новый элементы [4, 5]
-// ***(Method slice())
-
-// arr = [1, 2, 3, 4, 5];
-// arr1 = arr.slice(3);
-// console.log(arr1);
-
-// 5. .Дан массив [1, 2, 3, 4, 5]. С помощью метода splice преобразуйте массив в [1, 4, 5].
-// ***(Method splice)
-
-// arr = [1, 2, 3, 4, 5];
-// arr.splice(1, 2);
-// console.log(arr);
-
-// 5.  Дан массив [1, 2, 3, 4, 5]. С помощью метода splice запишите в новый массив элементы [2,
-// 3, 4].
-// ***(Method splice)
-
-// arr = [1, 2, 3, 4, 5];
-// arr1 = arr.splice(1, 3);
-// console.log(arr1);
-
-// Дан массив [1, 2, 3, 4, 5]. С помощью метода splice сделайте из него массив [1, 2, 3, 'a', 'b',
-// 'c', 4, 5].
-// ***(Method splice)
-
-arr = [1, 2, 3, 4, 5];
-arr.splice(3, 0, 'a', 'b', 'c') 
-console.log(arr);
