@@ -97,7 +97,7 @@
 // ***Method #1
 
 // function correct(str) {
-//    corStr =str;
+//    corStr =str.split('');
 
 //   for(i = 0; i <= corStr.length; i++) {
 //     switch(corStr[i]) {
