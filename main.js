@@ -65,6 +65,11 @@
 // user1.breakSomething();
 // admin1.fixSomething();
 
+
+// ***2. Относледовать холодильничек
+
+
+
 function Machine(power) {
   this._power = power;
   this._enabled = false;
