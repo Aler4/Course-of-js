@@ -115,9 +115,7 @@ icons.addEventListener("click", (e) => {
     sortList.style.visibility = 'hidden';
     sortList.style.left = '-100%';
   }
-  else if (e.target == document.querySelector('.cheap')){
-    
-  }
+
       })
 
 
