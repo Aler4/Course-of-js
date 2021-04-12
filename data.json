@@ -1,0 +1,40 @@
+[
+	{
+		"name": "Espresso",
+		"img": "https://pixfeeds.com/images/drinks/coffee/640-477335621-coffee.jpg",
+		"price": 26
+	},
+	{
+		"name": "Americano",
+		"img": "https://images.squarespace-cdn.com/content/v1/5a7cbe247131a5f17b3cc8fc/1519447742018-MOHBW2G0VOQ7QSCPJE14/ke17ZwdGBToddI8pDm48kHsMJ9SuTvzPQGYWvz_s8VxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVERtp2XdMl9TkoWep3sex-0XtFGJVOG-7fEoyhF7MYNN-4sk1tdgEkQsVzLuuaVaBo/Americano-Coffee-Lounge-Ingredients.jpg",
+		"price": 28
+	},
+	{
+		"name": "Latte",
+		"img": "https://www.acouplecooks.com/wp-content/uploads/2020/10/How-to-make-a-latte-003.jpg",
+		"price": 36
+	},
+	{
+		"name": "Cappuchino",
+		"img": "https://shop.vivascent.com.ua/content/images/38/capuccino_kapuchino-75939219941695_small11.jpg",
+		"price": 38
+	},
+	{
+		"name": "Flat White",
+		"img": "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-d8ada0f.jpg",
+		"price": 40
+	},
+	{
+		"name": "Moccachino",
+		"img": "https://media-cdn.tripadvisor.com/media/photo-s/05/ea/84/1f/belle-cafe.jpg",
+		"price": 40
+	}
+]
+
+
+
+
+
+
+
+

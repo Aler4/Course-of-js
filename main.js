@@ -1,126 +1,123 @@
-// 1 . Cоздать базовый класс User и отнаследовать
-// от него Admin в двух стилях - функциональном и на классах
-
-// ***Функиональное
 
 
+const url = 'data.json';
+const section = document.querySelector('.product');
+let products;
+let inCartCount = 0;
+let inCartSum = 0;
+let totalCount = document.querySelector('.count');
+let totalSum = document.querySelector('.summary');
+let id = Date.now()
 
-//  function User(name, age, hobbys) {
+let btnCart = document.querySelector('.btn-cart');
+let cart = document.querySelector('.cart');
 
-//   this.name = name;
-//   this.age = age;
-//   this.hobbys = [hobbys];
+let xhr = new XMLHttpRequest();
+xhr.open('GET', url, true); // конфигурируем запрос
+xhr.send(); // отправляем запрос
 
-//    this.breakSomething = function() {
-//     console.error( ` Hi I user: ${this.name}, I will break something here! :(` )
-//   }
-// };
-
-// function Admin(...args){
-//     User.call(this, ...args)
-//     this.fixSomething = function() {
-//     console.warn(`Hi! I admin: ${this.name}, I will fix
-//     everthing but anyway we will find you ${user1.name}`)
-//   }
-// };
-
-
-// const user1 = new User('Neo', 25, 'be cool');
-// const admin1 = new Admin('Smith', Infinity, 'destruction of humanity');
-
-// user1.breakSomething();
-// admin1.fixSomething();
-// console.log(user1);
-// console.log(admin1);
-
-
-
-// *****ООП
-
-// class User {
-
-//   constructor(name, age, hobbys) { 
-//     this.name = name;
-//     this.age = age;
-//     this.hobbys = [hobbys];
-//         this.breakSomething = function() {
-//     console.error( ` Hi I user: ${this.name}, I will break all here! :)` )
-//   }
-// }
-// }
-
-// class Admin extends User {
-//   constructor(...args) {
-//     super(...args)
-//     this.fixSomething = function (){
-//     console.warn(`Hi! I admin: ${this.name}, please do not :(`);
-//     }
-
-//   }
-// }
-
-// const user1 = new User('Masha', 8, 'irritate');
-// const admin1 = new Admin('Bear', 45, 'quiet life');
-
-// user1.breakSomething();
-// admin1.fixSomething();
-
-
-// ***2. Относледовать холодильничек
-
-
-
-function Machine(power) {
-  this._power = power;
-  this._enabled = false;
-
-  var self = this;
-
-  this.enable = function() {
-    self._enabled = true;
-  };
-
-  this.disable = function() {
-    self._enabled = false;
-  };
-}
-
-function Fridge() {
-
-  Machine.call(this, +arguments[0]);
-
-  let volume = +arguments[0] / 100;
-
-  this.food = [];
-
-  this.addFood = function(...foods) {
-
-    (this._enabled == false) ?
-    console.error('ошибка, холодильник выключен') :
-    this.food.push(...foods);
-
-    if (this.food.length > volume){
-
-      this.food = this.food.slice(0,volume)
-     console.error(' ошибка, слишком много еды')
-
-    };
+xhr.onload = () => {
+  if(xhr.status == 200){
+    products = JSON.parse(xhr.responseText);
+    buildLayout(products);
   }
-
-  this.getFood = function() { return this.food; } // Увы, как сделать массив неизменяемым я не допер :(
 }
 
-let fridge = new Fridge(500);
-fridge.enable();
 
-fridge.addFood("котлета");
-fridge.addFood("сок", "варенье");
+function buildLayout(data){
+  data.forEach(item => {
+    let div = document.createElement('div');
+    div.classList.add('coffee_item');
 
-var fridgeFood = fridge.getFood();
-alert( fridgeFood )
+    let img = new Image();
+    img.src= item.img;
 
-fridgeFood.push("вилка", "ложка");
+    let h3 = document.createElement('h3');
+    h3.textContent = item.name;
 
-alert( fridge.getFood() )
+    let price = document.createElement('h2');
+    price.textContent = item.price;
+
+    let btnAdd = document.createElement('button');
+    btnAdd.classList.add('btn-add');
+    btnAdd.innerText = 'Add to cart';
+    div.append(h3);
+    div.append(price);
+    div.append(btnAdd);
+    div.append(img);
+
+    section.append(div);
+  });
+
+}
+
+section.addEventListener('click', function(event){
+  if(event.target.tagName.toLowerCase() == 'button'){
+    addToCart(event.target.parentNode);
+  }
+});
+
+
+function addToCart(el){
+  let cartList = document.querySelector('.cart-list');
+  let cartListItem = document.createElement('li');
+  let priceSpan = document.createElement('span');
+  let name = el.querySelector('h3').innerText.trim();
+  let price = +el.querySelector('h2').innerText.trim();
+
+  let minusBtn = document.createElement('span');
+  minusBtn.innerText= '-';
+  minusBtn.classList.add('minus-item');
+
+  inCartSum += price;
+  inCartCount++;
+  totalCount.innerText = inCartCount;
+  totalSum.innerText = inCartSum;
+
+  cartListItem.append(`${name}:  ${price}ua`,minusBtn);
+  cartList.append(cartListItem,);
+
+
+
+}
+
+
+btnCart.addEventListener('click',(e) => {
+  cart.style.opacity = '1';
+  cart.style.visibility = 'visible';
+})
+cart.addEventListener('click',(e) => {
+  if (e.target == document.querySelector('.close-cart')){
+    cart.style.opacity = '0';
+    cart.style.visibility = 'hidden';
+  }
+  if (e.target == document.querySelector('.minus-item')){
+
+    totalCount.innerText = +totalCount.textContent -1;
+    // totalSum.innerText = +totalSum.textContent - +(e.target.parenNode.price);
+    e.target.parentNode.remove();
+  }
+})
+let icons = document.querySelector('.icon-container');
+
+icons.addEventListener("click", (e) => {
+
+  let sortList = icons.querySelector('.sort-list');
+  let sortBtn = document.querySelector('.sort-btn');
+
+  if (e.target == document.querySelector('.sort-btn')){
+    sortBtn.style.display = 'none';
+    sortList.style.visibility = 'visible';
+    sortList.style.left = '0';
+  }
+  else if (e.target == document.querySelector('.close-sort')) {
+    sortBtn.style.display = 'block';
+    sortList.style.visibility = 'hidden';
+    sortList.style.left = '-100%';
+  }
+  else if (e.target == document.querySelector('.cheap')){
+    
+  }
+      })
 
 
