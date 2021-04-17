@@ -11,10 +11,19 @@ img{
     width: 100%;
     height: 360px;
 }
+
 .icon-container {
     position: fixed;
     display: flex;
     flex-direction: column;
+}
+.bodge {
+    position: absolute;
+    color: #fff;
+    font-size: 1.5rem;
+    right: 40%;
+    top: 5%;
+    opacity: 0;
 }
 .btn-cart, .sort-btn {
     width: 80px;
@@ -62,20 +71,28 @@ img{
     padding: 10px 0;
 
 }
+.cart .list-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px 0;
+
+}
 .cart ul{
     list-style: none;
     text-align: left;
     font-size: 1.5rem;
+    padding: 0;
 }
 .cart ul li {
     line-height: 2;
 }
+
 .cart ul li span{
-    margin-left: 80%;
-    border-radius: 50%;
-    border: 1px solid black;
-    padding: 0 5px;
+    float: right;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding-top: 4px;
 }
 .cart input {
     font-size: 30px;
@@ -157,4 +174,38 @@ h3,h2 {
     margin: 0;
     padding: 10px 0 10px 0;
     font-family: system-ui;
+}
+.msg {
+    left: 40%;
+    position: fixed;
+    top: 1%;
+    text-align: center;
+    min-width: 500px;
+    width: fit-content;
+    background: #e5e3e3;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px -0.5px rgb(0 0 0 / 20%);
+    transition: ease-in 1s;
+}
+.msg p {
+    font-size: 1.8rem;
+    font-family: sans-serif;
+}
+.msg button {
+    font-size: 2rem;
+    width: 80px;
+    height: 50px;
+    background: #3e3eff;
+    border: none;
+    outline: none;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: ease-in 0.3s;
+}
+.msg button:hover {
+    background: #3232c1;
 }
