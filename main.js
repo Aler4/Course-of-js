@@ -141,7 +141,7 @@ function addToCart(el){
   
 }
 class Modal {
-    constructor(el) {
+    constructor() {
       let msg = document.createElement('div');
       msg.classList.add('msg');
       let yesBtn = document.createElement('button');
@@ -154,7 +154,6 @@ class Modal {
       this.msg.style.display = 'none';
       this.yesBtn = yesBtn;
       this.noBtn = noBtn;
-      debugger
     }
   show(e){
     this.msg.innerHTML = `<p>Do you want to delete ${e.parentNode.parentNode.innerText}?</p>`;
@@ -185,9 +184,8 @@ let applyDel = function (el) {
   totalCount.forEach((item) => {
     item.innerText = +item.innerText - 1;
     inCartCount = totalCount[0].innerText;
-    modal.close();
-
   })
+  modal.close();
 }
 let disApplyDel = function(el) {
   modal.close();
