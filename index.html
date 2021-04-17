@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <title>JS FE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-	
-	<script type="text/javascript" src="main.js">
-		
-	</script>
+
+<div class="container">
+    <div class="icon-container">
+        <a href="#" class="btn-cart"><i class="fas fa-shopping-cart"></i> <span class="count bodge">0</span></a>
+        <a href="#" class="sort-btn"> <i class="fas fa-sort"></i></a>
+        <div class="sort-list">
+            <a href="#" class="price">Price</a>
+            <a href="#" class="name">Name</a>
+            <span class="close-sort"><</span>
+        </div>
+    </div>
+
+
+
+    <div class="cart">
+        <input class="close-cart" type="button" value="X">
+        <ul class="cart-list">
+        </ul>
+        <p><span class="count">0</span> item(s) in your cart, <br>
+            cart total = <span class="summary">0</span> UAH</p>
+    </div>
+
+    <section class="product">
+
+    </section>
+</div>
+
+
+
+<script src="main.js"></script>
 </body>
 </html>
