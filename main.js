@@ -73,6 +73,7 @@ function addToCart(el){
   let cartListItemContent = document.createElement('p');
   cartListItemContent.classList.add('list-content')
   let cartListPrice = document.createElement("i");
+  cartListPrice.classList.add('price');
 
 
   cartListItem.id = id;
@@ -97,10 +98,24 @@ function addToCart(el){
 
   showBodge(inCartCount, bodge);
 
-    // ******Callback
+// *** Promise 143 row start
 
+  minusBtn.addEventListener('click',(e) => {
+    modal.show().then(
+        () => {
+      delItem(e.target),
+          applyDel(e.target);
+    },
+        () => {
+          disApplyDel(e.target);
+        })
+
+  })
+
+  //   // ******Callback
+  //
   // minusBtn.addEventListener('click', (e) => {msgDel(minusBtn.parentNode.innerText,del,notDel)})
-
+  //
   // function msgDel(e,yes,no){
   //   let result = confirm(`Do you want to remove ${e}`);
   //   result ? yes() : no()
@@ -123,55 +138,64 @@ function addToCart(el){
   //   alert(`${minusBtn.parentNode.innerText}not remove!`)
   // };
 
-  // **** Promise****
-
-  minusBtn.addEventListener('click', (e) => {delPromise()})
-
-  function delPromise() {
-    return new Promise(function (resolve, reject) {
-      let cart = document.querySelector('.cart');
-      cart.style.display = 'none';
+  
+}
+class Modal {
+    constructor(el) {
       let msg = document.createElement('div');
       msg.classList.add('msg');
-      msg.innerHTML = `<p>Do you want to delete ${minusBtn.parentNode.innerText}?</p>`;
+      msg.innerHTML = `<p>Do you want to delete ${el}?</p>`;
       let yesBtn = document.createElement('button');
       yesBtn.classList.add('yes-btn');
       yesBtn.innerText= 'Yes';
       let noBtn = document.createElement('button');
       noBtn.classList.add('no-btn');
       noBtn.innerText= 'No';
-
       msg.append(yesBtn, noBtn);
       document.body.append(msg)
-      resolve()
-      reject()
-    })
-        .then(() => {
-          let agree = document.querySelector('.yes-btn')
-          let disagree = document.querySelector('.no-btn')
-          agree.addEventListener('click', () => {
-            minusBtn.parentNode.remove();
-            totalCount.forEach((item) => {
-              item.innerText = +item.innerText - 1;
-              inCartCount = totalCount[0].innerText;
-            })
-            inCartSum = totalSum.innerText - cartListPrice.innerText;
-            totalSum.innerText = inCartSum;
-            cartArr.splice(inCartCount - 1, 1)
-            alert(`${minusBtn.parentNode.innerText} was removed!`)
-            document.querySelector('.msg').remove()
-            cart.style.display = 'block';
-
-          })
-          disagree.addEventListener('click', () => {
-            alert(`${minusBtn.parentNode.innerText} was not removed!`)
-            document.querySelector('.msg').remove()
-            cart.style.display = 'block';
-
-          })
-        })
+      this.msg = msg;
+      this.msg.style.display = 'none';
+      this.yesBtn = yesBtn;
+      this.noBtn = noBtn;
+    }
+  show(){
+    this.msg.style.display = 'block';
+    return new Promise((res,rej) => {
+      this.yesBtn.onclick = res;
+      this.noBtn.onclick = rej;
+    }).then()
   }
+  close() {
+    this.msg.style.display = 'none';
+  }
+
 }
+let modal = new Modal();
+
+let delItem = function(el) {
+  el.parentNode.parentNode.remove();
+  alert(`${el.parentNode.parentNode.innerText} was removed!`)
+}
+let applyDel = function (el) {
+  inCartSum = totalSum.innerText - el.parentNode.parentNode.querySelector('.price').innerHTML;
+  totalSum.innerText = inCartSum;
+  cartArr.splice(inCartCount - 1, 1)
+
+  totalCount.forEach((item) => {
+    item.innerText = +item.innerText - 1;
+    inCartCount = totalCount[0].innerText;
+    modal.close();
+
+  })
+}
+let disApplyDel = function(el) {
+  modal.close();
+  alert(`${el.parentNode.parentNode.innerText} was not removed!`)
+}
+
+
+
+
 
 
 function showBodge(count, element) {
