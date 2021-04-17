@@ -101,7 +101,7 @@ function addToCart(el){
 // *** Promise 143 row start
 
   minusBtn.addEventListener('click',(e) => {
-    modal.show().then(
+    modal.show(e.target).then(
         () => {
       delItem(e.target),
           applyDel(e.target);
@@ -144,21 +144,22 @@ class Modal {
     constructor(el) {
       let msg = document.createElement('div');
       msg.classList.add('msg');
-      msg.innerHTML = `<p>Do you want to delete ${el}?</p>`;
       let yesBtn = document.createElement('button');
       yesBtn.classList.add('yes-btn');
       yesBtn.innerText= 'Yes';
       let noBtn = document.createElement('button');
       noBtn.classList.add('no-btn');
       noBtn.innerText= 'No';
-      msg.append(yesBtn, noBtn);
-      document.body.append(msg)
       this.msg = msg;
       this.msg.style.display = 'none';
       this.yesBtn = yesBtn;
       this.noBtn = noBtn;
+      debugger
     }
-  show(){
+  show(e){
+    this.msg.innerHTML = `<p>Do you want to delete ${e.parentNode.parentNode.innerText}?</p>`;
+    this.msg.append(this.yesBtn, this.noBtn);
+    document.body.append(this.msg)
     this.msg.style.display = 'block';
     return new Promise((res,rej) => {
       this.yesBtn.onclick = res;
